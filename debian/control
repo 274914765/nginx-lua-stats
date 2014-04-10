@@ -1,0 +1,14 @@
+Source: lua-nginx-statistics
+Section: misc
+Priority: extra
+Maintainer: Alexander Kushnarev <avkushnarev@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+Homepage: https://github.com/yandex-sysmon/nginx-lua-stats
+Vcs-Git: git://github.com/yandex-sysmon/lua-nginx-statistics.git
+
+Package: lua-nginx-statistics
+Architecture: all
+Depends: ${misc:Depends}, liblua5.1-json
+Description: Collect nginx statistic 
+  Collect nginx reply statuses and request time statistics.

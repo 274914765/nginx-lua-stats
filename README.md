@@ -3,22 +3,26 @@ Nginx statistic module
 [![Build Status](https://travis-ci.org/shoonoise/lua-nginx-statistics.svg?branch=master)](https://travis-ci.org/shoonoise/lua-nginx-statistics)
 ## Overview
 
-Nginx Lua module to collect reply status counters.
+Nginx Lua module to collect and show statistics.
 See `nginx.conf` for example.
 
-`collect_statuses.lua` module collect statistic counters for requests across location with `log_by_lua_file 'collect_stats.lua';` directive.
+`collect_statuses.lua` module collect statistics for requests across location with `log_by_lua_file 'collect_stats.lua';` directive.
 
 `show_stat.lua` response for JSON reply.
 
 ## Try it
 
+For a start, you need nginx with [HttpLuaModule](http://wiki.nginx.org/HttpLuaModule), and lua json lib installed (`liblua5.1-json` for ubuntu).
+
 * Clone this repository
-* Copy \*.lua files from root to some path(`/usr/share/nginx/`, for example)
+* Copy \*.lua files from root to some path(`/usr/share/nginx/`, in example below)
 
 Update your `nginx.conf`:
 
-* Add `log_by_lua_file '/path/to/collect_stats.lua';` directive in location from which to you want collect statistic
-* Add new location to get statistic and put `/path/to/content_by_lua_file 'show_stat.lua'` directive inside
+* Add `lua_shared_dict stat_dict 1M;` in http section
+* Add `lua_package_path '/usr/share/nginx/?.lua;;';` in http section
+* Add `log_by_lua_file '/usr/share/nginx/collect_stats.lua';` directive in location from which to you want collect statistic
+* Add new location to get statistic and put `/usr/share/nginx/content_by_lua_file 'show_stat.lua'` directive inside
 * Enjoy!
 
 ## Try it with docker
